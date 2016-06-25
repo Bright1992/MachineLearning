@@ -1,10 +1,10 @@
 %Gen data
-M=1;N=100;
+M=2;N=100;
 x=random('unif',0,10,N,M);
 y=zeros(N,1);
 for i = 1:size(x,1)
     %if(x(i,1)<5&&x(i,2)<5)
-    if(x(i)<8)
+    if(x(i,1)+2*x(i,2)<10)
         y(i)=1;
     end
 end
@@ -41,5 +41,27 @@ for i = 1:N
     h(i)=sigmoid(x(i,:),theta);
     h2(i)=percpt(x(i,:),theta2);
 end
-plot(x(:,2),h,'b*',x(:,2),h2,'r*');
+plot3(x(:,2),x(:,3),h,'b*',x(:,2),x(:,3),h2,'r*');
 legend('Sigmoid','Perceptron');
+x1=[];x2=[];x3=[];x4=[];
+figure(2);
+axis([0,10,0,10]);
+for i=1:N
+    if(x(i,2)+2*x(i,3)<10)
+        x1=[x1,x(i,2)];
+        x2=[x2,x(i,3)];
+    else
+        x3=[x3,x(i,2)];
+        x4=[x4,x(i,3)];
+    end
+end
+plot(x1,x2,'o');
+hold on;
+plot(x3,x4,'x');
+theta12=theta./theta(3);
+theta22=theta2./theta2(3);
+A1=[0,10];B1=[-theta12(1),-theta12(1)-10*theta12(2)];
+A2=[0,10];B2=[-theta22(1),-theta22(1)-10*theta22(2)];
+p=plot(A1,B1,'r',A2,B2,'b');
+legend(p,'Sigmoid','Perceptron');
+hold off;
