@@ -1,0 +1,18 @@
+%Gen data
+M=2;N=100;
+x=random('unif',0,10,N,M);
+y=zeros(N,1);
+for i = 1:size(x,1)
+    if(x(i,1)<5&&x(i,2)<5)
+        y(i)=1;
+    end
+end
+
+theta=ones(M+1,1);
+x=[zeros(N,1),x];
+count=0;err=1000;
+while(err>0.01)
+   for i=1:N
+       
+   end
+end
